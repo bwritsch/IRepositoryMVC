@@ -28,18 +28,38 @@ namespace RepositoryMvc.Controllers
             return View(courses);
         }
 
-        public ActionResult About()
+        public ActionResult Edit(int Id)
         {
-            ViewBag.Message = "Your application description page.";
+            var course = _courseContext.SingleOrDefault(c=>c.Id==Id);
 
-            return View();
+            if (course == null)
+                throw new Exception();
+
+            return View(course);
         }
 
-        public ActionResult Contact()
+        [HttpPost]
+        public ActionResult Edit(int Id, Course course)
         {
-            ViewBag.Message = "Your contact page.";
+            if (Id != course.Id)
+                return new HttpNotFoundResult();
 
-            return View();
+            var thisCourse = _courseContext.SingleOrDefault(c => c.Id == Id);
+
+            if (thisCourse == null)
+                throw new Exception();
+
+            thisCourse.Name = course.Name;
+            thisCourse.Description = course.Description;
+            thisCourse.Level = course.Level;
+            thisCourse.FullPrice = course.FullPrice;
+            thisCourse.AuthorId = course.AuthorId;
+
+            _courseContext.Update(thisCourse);
+            _courseContext.Commit();
+
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
