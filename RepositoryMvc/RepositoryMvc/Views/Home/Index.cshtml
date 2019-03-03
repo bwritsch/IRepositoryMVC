@@ -1,5 +1,5 @@
 ﻿@model IEnumerable<RepositoryMvc.Models.Course>
-
+@using RepositoryMvc.Extension
 @{
     ViewBag.Title = "Index";
 }
@@ -51,6 +51,7 @@
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
             @Html.ActionLink("Delete", "Delete", new { id=item.Id })
         </td>
+        @*<td>@Html.DropDownListFor(x => item.Authors, item.Authors.ToSelectList(x => x.Name, x => x.Name))</td>*@
     </tr>
 }
 

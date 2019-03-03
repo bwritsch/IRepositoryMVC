@@ -11,13 +11,15 @@ namespace RepositoryMvc.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IRepository<Author> _authorContext;
+        //private readonly IRepository<Author> _authorContext;
         private readonly IRepository<Course> _courseContext;
+        private readonly IAuthorRepository _authorRepository;
 
-        public HomeController(IRepository<Author> authorContext, IRepository<Course> courseContext)
+        public HomeController(IRepository<Author> authorContext, IRepository<Course> courseContext, IAuthorRepository authorRepository)
         {
-            _authorContext = authorContext;
+            //_authorContext = authorContext;
             _courseContext = courseContext;
+            _authorRepository = authorRepository;
         }
 
 
@@ -26,6 +28,13 @@ namespace RepositoryMvc.Controllers
             var courses = _courseContext.GetAll();
 
             return View(courses);
+        }
+
+        public ActionResult Authors()
+        {
+            var authors = _authorRepository.GeAuthorList();
+
+            return View(authors);
         }
 
         public ActionResult Edit(int Id)

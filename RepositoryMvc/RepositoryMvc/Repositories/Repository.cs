@@ -73,5 +73,33 @@ namespace RepositoryMvc.Repositories
             dbSet.Attach(entity);
             _context.Entry(entity).State = EntityState.Modified;
         }
+//-------------------------------------------------------------------------
+        private void Example(T temp)
+        {
+            Func<int, int> ex = FuncExample;
+            Func<int, int> example = n => n * 10;
+
+            dbSet.Where(PredicateMethod(temp));
+            dbSet.Where(x => x == null);
+
+        }
+
+        private int FuncExample(int a)
+        {
+            return a * 10;
+        }
+
+        private T SingleOrDefault(Func<T, bool> predicate)
+        {
+            return dbSet.SingleOrDefault(predicate);
+        }
+
+
+        //Predicate
+        private Func<T,bool> PredicateMethod(T a)
+        {
+            return x => a == null;
+        }
+
     }
 }

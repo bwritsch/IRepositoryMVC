@@ -48,6 +48,7 @@ namespace RepositoryMvc
 
             container.RegisterType<IRepository<Author>, Repository<Author>>();
             container.RegisterType<IRepository<Course>, Repository<Course>>();
+            container.RegisterType<IAuthorRepository, AuthorRepository>();
         }
     }
 }
