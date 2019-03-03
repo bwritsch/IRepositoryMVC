@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RepositoryMvc.Contract;
+using RepositoryMvc.Models;
+using RepositoryMvc.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +11,21 @@ namespace RepositoryMvc.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly IRepository<Author> _authorContext;
+        private readonly IRepository<Course> _courseContext;
+
+        public HomeController(IRepository<Author> authorContext, IRepository<Course> courseContext)
+        {
+            _authorContext = authorContext;
+            _courseContext = courseContext;
+        }
+
+
         public ActionResult Index()
         {
-            return View();
+            var courses = _courseContext.GetAll();
+
+            return View(courses);
         }
 
         public ActionResult About()
