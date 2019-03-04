@@ -6,7 +6,7 @@ using System.Web;
 
 namespace RepositoryMvc.Contract
 {
-    public interface IAuthorRepository
+    public interface IAuthorRepository : IRepository<Author>
     {
 
         List<Author> GeAuthorList();
