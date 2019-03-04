@@ -10,6 +10,6 @@ namespace RepositoryMvc.Contract
     {
 
         List<Author> GeAuthorList();
-
+         
     }
 }
